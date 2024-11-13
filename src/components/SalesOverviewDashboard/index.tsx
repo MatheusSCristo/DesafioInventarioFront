@@ -94,7 +94,7 @@ const widgets = [
 
 const SalesOverviewDashboard = () => {
   return (
-    <div className="w-3/4 bg-white p-5 rounded-md flex flex-col gap-5 ">
+    <div className="w-full bg-white p-5 rounded-md flex flex-col gap-5 ">
       <h1 className="font-semibold text-gray-800 text-xl">
         Visão Geral de Vendas
       </h1>
@@ -106,7 +106,7 @@ const SalesOverviewDashboard = () => {
               alt={widget.text}
             />
             <div className="flex gap-2">
-              <span className="text-gray-600 font-bold">{widget.value}</span>
+              <span className="text-gray-600 font-bold">{widget.text == 'Vendas'? widget.value : `R$ ${widget.value}`}</span>
               <span className="text-gray-500">{widget.text}</span>
             </div>
           </div>
