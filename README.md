@@ -1,50 +1,36 @@
-# React + TypeScript + Vite
+# Desafio Técnico Front
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esse é um desafio técnico que simula uma loja fictícia . O objetivo principal deste projeto é gerenciar o estoque de produtos, gerar relatórios de vendas e estoque, e permitir a exportação desses relatórios para PDF. O sistema é composto por um backend em Node.js com Prisma e MySQL, e um frontend em React com TypeScript, utilizando TanStack Table para manipulação de tabelas e Tailwind CSS para estilização.
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Gerenciamento de Produtos**: Adicione, edite e visualize produtos na loja fictícia.
+- **Relatórios de Estoque**: Acompanhe o estoque atual de diversos produtos.
+- **Relatórios de Vendas**: Acompanhe o total de vendas realizadas, com dados como quantidade vendida e total de vendas.
+- **Exportação de Relatórios em PDF**: Exporte os relatórios de estoque e vendas em PDF.
+- **Interface Interativa**: Visualize os dados de forma interativa com tabelas .
 
-## Expanding the ESLint configuration
+## Tecnologias Utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React**: Biblioteca para construção da interface do usuário.
+- **TypeScript**: Superset do JavaScript para maior segurança e escalabilidade.
+- **TanStack Table**: Biblioteca para manipulação de tabelas no frontend.
+- **Tailwind CSS**: Framework de CSS para estilização responsiva e rápida.
+- **DaisyUI**: Componentes UI baseados em Tailwind CSS.
+- **React-to-print**: Biblioteca para exportação de conteúdo em PDF.
 
-- Configure the top-level `parserOptions` property like this:
+## Como Rodar o Projeto
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### 1. Clonar o Repositório
+
+```bash
+git clone https://github.com/MatheusSCristo/DesafioInventarioFront.git
+cd techhub
+```
+### 2. Rodar o FrontEnd
+```bash
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### 3. Acessar a pagina
+  - http://localhost:5173
