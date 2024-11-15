@@ -1,4 +1,5 @@
 import InventorySummary from "./components/InventorySummary";
+import MostSoldProductsDashboard from "./components/MostSoldProductsDashboard";
 import PurchaseOverviewDashboard from "./components/PurchaseOverviewDashboard";
 import SalesDashboard from "./components/SalesDashboard";
 import SalesOverviewDashboard from "./components/SalesOverviewDashboard";
@@ -17,6 +18,9 @@ function App() {
         <div className="flex flex-col gap-5">
           <SalesDashboard/>
         </div>
+      </div>
+      <div className="flex flex-col w-1/2">
+        <MostSoldProductsDashboard/>
       </div>
     </main>
   );
