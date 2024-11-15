@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { Product } from "../../../types";
 import { ProductContext } from "../../context/ProductContext";
 import PaginationTable from "../../utils/PaginationTable";
+import NewProductModal from "./NewProductModal";
 import ProductModal from "./ProductModal";
 
 const columnHelper = createColumnHelper<Product>();
@@ -54,10 +55,18 @@ const ProductsDashboard = () => {
     }),
   ];
 
+  const [createProductModalOpen, setCreateProductModalOpen] = useState(false);
+
+
   return (
     <>
       <div className="w-full bg-white p-5 rounded-md flex flex-col gap-5 ">
-        <h1 className="text-xl font-semibold">Produtos</h1>
+        <div className="flex justify-between">
+          <h1 className="text-xl font-semibold">Produtos</h1>
+          <button className="btn btn-wide bg-blue-600 text-white hover:text-black" onClick={()=>setCreateProductModalOpen(true)}>
+            Adicionar Produto
+          </button>
+        </div>
         <PaginationTable columns={columns} data={products} pageSize={7} />
       </div>
       {productToViewDetails && (
@@ -67,6 +76,9 @@ const ProductsDashboard = () => {
             setProductToViewDetails(null);
           }}
         />
+      )}
+      {createProductModalOpen && (
+        <NewProductModal handleClose={()=>setCreateProductModalOpen(false)}/>
       )}
     </>
   );

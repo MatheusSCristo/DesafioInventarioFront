@@ -51,7 +51,7 @@ const PaginationTable = ({ pageSize, data, columns }: PaginationTableProps) => {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="text-center">
+            <tr key={row.id} className="text-center ">
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

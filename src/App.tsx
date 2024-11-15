@@ -5,6 +5,7 @@ import PurchaseOverviewDashboard from "./components/PurchaseOverviewDashboard";
 import SalesDashboard from "./components/SalesDashboard";
 import SalesOverviewDashboard from "./components/SalesOverviewDashboard";
 
+
 function App() {
   return (
     <main className="flex gap-5 bg-gray-50 p-10 h-screen">
