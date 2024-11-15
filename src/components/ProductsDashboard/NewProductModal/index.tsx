@@ -87,7 +87,7 @@ const NewProductModal = ({handleClose}:{handleClose:()=>void}) => {
   ];
 
   return (
-    <div className="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-gray-transparent">
+    <div className="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-gray-transparent z-10">
       <div className="relative bg-white w-[30%] h-fit flex flex-col p-10 gap-5 rounded-xl border-gray-300 border">
         <span
           className="absolute top-5 right-5 cursor-pointer text-2xl font-bold"
