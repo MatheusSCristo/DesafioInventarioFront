@@ -1,12 +1,13 @@
 import InventorySummary from "./components/InventorySummary";
 import MostSoldProductsDashboard from "./components/MostSoldProductsDashboard";
+import ProductsDashboard from "./components/ProductsDashboard";
 import PurchaseOverviewDashboard from "./components/PurchaseOverviewDashboard";
 import SalesDashboard from "./components/SalesDashboard";
 import SalesOverviewDashboard from "./components/SalesOverviewDashboard";
 
 function App() {
   return (
-    <main className="flex gap-5 bg-gray-50 p-10 min-h-screen">
+    <main className="flex gap-5 bg-gray-50 p-10 h-screen">
       <div className="w-1/2 flex flex-col gap-5">
         <div className="flex flex-col gap-2">
           <SalesOverviewDashboard />
@@ -19,8 +20,9 @@ function App() {
           <SalesDashboard/>
         </div>
       </div>
-      <div className="flex flex-col w-1/2">
+      <div className="flex flex-col w-1/2 gap-5">
         <MostSoldProductsDashboard/>
+        <ProductsDashboard/>
       </div>
     </main>
   );

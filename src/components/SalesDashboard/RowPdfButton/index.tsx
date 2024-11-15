@@ -23,11 +23,11 @@ const RowPdfButton = ({ Component,sale }: RowPdfButtonProps) => {
       >
         <svg
           enableBackground="new 0 0 500 500"
-          height="50px"
+          height="auto"
           id="Layer_1"
           version="1.1"
           viewBox="0 0 500 500"
-          width="50px"
+          width="40px"
         >
           <line
             fill="none"

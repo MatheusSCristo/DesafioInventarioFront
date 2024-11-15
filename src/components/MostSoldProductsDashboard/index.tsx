@@ -1,9 +1,9 @@
 import {
-    createColumnHelper,
-    flexRender,
-    getCoreRowModel,
-    getPaginationRowModel,
-    useReactTable,
+  createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  useReactTable,
 } from "@tanstack/react-table";
 import { useContext } from "react";
 import { Product } from "../../../types";
@@ -42,7 +42,7 @@ const sortProducts=(products:Product[])=>{
 const MostSoldProductsDashboard = () => {
   const { products } = useContext(ProductContext);
   const table = useReactTable({
-    data: sortProducts(products).slice(0, 10),
+    data: sortProducts(products).slice(0, 5),
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),

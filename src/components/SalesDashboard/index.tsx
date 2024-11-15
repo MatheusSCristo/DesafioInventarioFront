@@ -1,10 +1,47 @@
+import { createColumnHelper } from "@tanstack/react-table";
 import { useContext, useEffect, useState } from "react";
 import { Sale } from "../../../types";
 import { SalesContext } from "../../context/SalesContext";
+import PaginationTable from "../../utils/PaginationTable";
 import PdfButton from "../../utils/PdfButton";
 import FilterModal from "./FilterModal";
+import IndividualSaleTable from "./IndividualSaleTable";
+import RowPdfButton from "./RowPdfButton";
 import SalesTableExport from "./SalesTableExport";
-import Table from "./Table";
+
+const columnHelper = createColumnHelper<Sale>();
+
+const columns = [
+  columnHelper.accessor((row) => row.id, {
+    id: "lastName",
+    cell: (info) => <span>#{info.getValue()}</span>,
+    header: () => <span>ID</span>,
+  }),
+  columnHelper.accessor("total_price", {
+    cell: (info) => (
+      <span>
+        R${info.getValue().toLocaleString("pt-BR", { maximumFractionDigits: 2 })}
+      </span>
+    ),
+    header: () => <span>Valor Total da Venda</span>,
+  }),
+  columnHelper.accessor("createdAt", {
+    cell: (info) => (
+      <span>{new Date(Date.parse(info.getValue())).toLocaleDateString()}</span>
+    ),
+    header: () => <span>Data</span>,
+  }),
+  columnHelper.accessor("discount", {
+    cell: (info) => (
+      <div className="flex justify-center ">
+       <RowPdfButton  Component={IndividualSaleTable} sale={info.row.original}/>
+      </div>
+    ),
+    header: () => <span>Exportar</span>,
+  }),
+];
+
+
 
 const SalesDashboard = () => {
   const [filterIsOpen, setFilterIsOpen] = useState(false);
@@ -74,7 +111,7 @@ const SalesDashboard = () => {
           />
         </div>
       </div>
-      <Table sales={salesToShow} />
+      <PaginationTable data={salesToShow} columns={columns} pageSize={4} />
     </div>
   );
 };

@@ -12,10 +12,7 @@ const InventorySummary = () => {
         <img src="src/assets/icons/quantity.svg" />
         <div className="flex flex-col items-center gap-0">
           <span className="text-gray-600 font-bold">
-            {products.reduce(
-              (acc, product) => acc + product.quantity_available,
-              0
-            )}
+            {products.length}
           </span>
           <h2>Em estoque</h2>
         </div>
