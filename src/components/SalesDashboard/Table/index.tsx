@@ -1,116 +1,15 @@
 import {
-    createColumnHelper,
-    flexRender,
-    getCoreRowModel,
-    getPaginationRowModel,
-    PaginationState,
-    useReactTable,
+  createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  PaginationState,
+  useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
 import { Sale } from "../../../../types";
-
-const sales: Sale[] = [
-  {
-    id: 4122,
-    total_price: 2500,
-    createdAt: new Date(),
-    discount: 30,
-    product_sold: [
-      {
-        id: 1,
-        product_id: 1,
-        sale_price: 500,
-        quantity_sold: 2,
-        product: {
-          id: 1,
-          name: "product1",
-          purchase_price: 200,
-          category: "category1",
-          createdAt: new Date(),
-          description: "description1",
-          manufacturer: "manufacturer1",
-          quantity_available: 10,
-          min_quantity_threshold: 5,
-        },
-        sale_id: 1,
-        createdAt: new Date(),
-      },
-      {
-        id: 2,
-        product_id: 2,
-        sale_price: 500,
-        quantity_sold: 3,
-        product: {
-          id: 2,
-          name: "product2",
-          purchase_price: 200,
-          category: "category2",
-          createdAt: new Date(),
-          description: "description2",
-          manufacturer: "manufacturer2",
-          quantity_available: 10,
-          min_quantity_threshold: 5,
-        },
-        sale_id: 1,
-        createdAt: new Date(),
-      },
-    ],
-  },
-  {
-    id: 4312,
-    total_price: 2500,
-    createdAt: new Date(),
-    discount: 30,
-    product_sold: [
-      {
-        id: 1,
-        product_id: 1,
-        sale_price: 500,
-        quantity_sold: 2,
-        product: {
-          id: 1,
-          name: "product1",
-          purchase_price: 200,
-          category: "category1",
-          createdAt: new Date(),
-          description: "description1",
-          manufacturer: "manufacturer1",
-          quantity_available: 10,
-          min_quantity_threshold: 5,
-        },
-        sale_id: 1,
-        createdAt: new Date(),
-      },
-      {
-        id: 2,
-        product_id: 2,
-        sale_price: 500,
-        quantity_sold: 3,
-        product: {
-          id: 2,
-          name: "product2",
-          purchase_price: 200,
-          category: "category2",
-          createdAt: new Date(),
-          description: "description2",
-          manufacturer: "manufacturer2",
-          quantity_available: 10,
-          min_quantity_threshold: 5,
-        },
-        sale_id: 1,
-        createdAt: new Date(),
-      },
-    ],
-  }
-];
-
-const getFormattedDate = (date: Date) => {
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  console.log(date);
-  return `${day}/${month}/${year}`;
-};
+import IndividualSaleTable from "./IndividualSaleTable";
+import RowPdfButton from "./RowPdfButton";
 
 const columnHelper = createColumnHelper<Sale>();
 
@@ -121,25 +20,37 @@ const columns = [
     header: () => <span>ID</span>,
   }),
   columnHelper.accessor("total_price", {
-    cell: (info) => <span>{info.getValue()}</span>,
+    cell: (info) => (
+      <span>
+        {info.getValue().toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+      </span>
+    ),
     header: () => <span>Valor Total da Venda</span>,
   }),
   columnHelper.accessor("createdAt", {
-    cell: (info) => <span>{getFormattedDate(info.getValue())}</span>,
+    cell: (info) => (
+      <span>{new Date(Date.parse(info.getValue())).toLocaleDateString()}</span>
+    ),
     header: () => <span>Data</span>,
+  }),
+  columnHelper.accessor("discount", {
+    cell: (info) => (
+      <div className="flex justify-center ">
+       <RowPdfButton  Component={IndividualSaleTable} sale={info.row.original}/>
+      </div>
+    ),
+    header: () => <span>Exportar</span>,
   }),
 ];
 
-const Table = () => {
-  const [data, _setData] = useState(() => [...sales]);
-
+const Table = ({ sales }: { sales: Sale[] }) => {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 4,
   });
 
   const tablec = useReactTable({
-    data,
+    data: sales,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -147,7 +58,6 @@ const Table = () => {
     state: {
       pagination,
     },
-    
   });
 
   return (
@@ -187,8 +97,11 @@ const Table = () => {
           {tablec.getPageCount()}
         </span>
         <div className="flex gap-2">
-          <button className="btn btn-square" onClick={()=>tablec.previousPage()}
-          disabled={!tablec.getCanPreviousPage()}>
+          <button
+            className="btn btn-square"
+            onClick={() => tablec.previousPage()}
+            disabled={!tablec.getCanPreviousPage()}
+          >
             <svg
               width="20"
               height="20"
@@ -199,14 +112,17 @@ const Table = () => {
               <path
                 d="M30 36L18 24L30 12"
                 stroke="#1E1E1E"
-                stroke-width="4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </button>
-          <button className="btn btn-square" onClick={()=>tablec.nextPage()}
-          disabled={!tablec.getCanNextPage()}>
+          <button
+            className="btn btn-square"
+            onClick={() => tablec.nextPage()}
+            disabled={!tablec.getCanNextPage()}
+          >
             <svg
               width="20"
               height="20"
@@ -217,9 +133,9 @@ const Table = () => {
               <path
                 d="M18 36L30 24L18 12"
                 stroke="#1E1E1E"
-                stroke-width="4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </button>
