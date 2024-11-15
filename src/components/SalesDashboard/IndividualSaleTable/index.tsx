@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { Sale } from "../../../../../types";
+import { Sale } from "../../../../types";
 import IndividualSaleTableTemplate from "./IndividualSaleTableTemplate";
 
 const IndividualSaleTable = forwardRef<HTMLDivElement, { sale: Sale }>(

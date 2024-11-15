@@ -1,13 +1,10 @@
 import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  useReactTable,
+  createColumnHelper
 } from "@tanstack/react-table";
 import { useContext } from "react";
 import { Product } from "../../../types";
 import { ProductContext } from "../../context/ProductContext";
+import SimpleTable from "../../utils/SimpleTable";
 
 const columnHelper = createColumnHelper<Product>();
 
@@ -41,45 +38,12 @@ const sortProducts=(products:Product[])=>{
 
 const MostSoldProductsDashboard = () => {
   const { products } = useContext(ProductContext);
-  const table = useReactTable({
-    data: sortProducts(products).slice(0, 5),
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-  });
+  
 
   return (
     <div className="bg-white p-5 rounded-md flex flex-col gap-5 ">
       <h1 className="font-semibold text-xl">Produtos Mais Vendidos</h1>
-      <table className="table">
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id} className="text-center">
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="text-center">
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        <SimpleTable data={sortProducts(products).slice(0,5)} columns={columns} />
     </div>
   );
 };

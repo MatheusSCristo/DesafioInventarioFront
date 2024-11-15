@@ -4,7 +4,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ProductSold, Sale } from "../../../../../../types";
+import { ProductSold, Sale } from "../../../../../types";
 
 const columnHelper = createColumnHelper<ProductSold>();
 

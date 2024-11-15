@@ -5,7 +5,6 @@ import { SalesContext } from "../../context/SalesContext";
 const SalesOverviewDashboard = () => {
   const { sales } = useContext(SalesContext);
   const {products} = useContext(ProductContext);
-  console.log(sales )
   
   const profit = sales.reduce((acc, sale) => acc + sale.total_price, 0) - 
   products.reduce((acc, product) => {

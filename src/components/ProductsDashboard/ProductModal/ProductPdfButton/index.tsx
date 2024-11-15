@@ -1,15 +1,18 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-import { Sale } from "../../../../types";
+import { Product, Sale } from "../../../../../types";
 
-type RowPdfButtonProps = {
+type PdfButtonProps = {
   Component: React.ForwardRefExoticComponent<
-    React.RefAttributes<HTMLDivElement> & {sale:Sale}
+    React.RefAttributes<HTMLDivElement> & { sales: Sale[] }&
+    {columns:any[]} & {product:Product}
   >;
-   sale:Sale
+  sales: Sale[];
+  product: Product;
+  columns:any[]
 };
 
-const RowPdfButton = ({ Component,sale }: RowPdfButtonProps) => {
+const ProductPdfButton = ({ Component, sales,product,columns }: PdfButtonProps) => {
   const tableRef = useRef(null);
 
   const handlePrint = useReactToPrint({ contentRef: tableRef });
@@ -17,17 +20,17 @@ const RowPdfButton = ({ Component,sale }: RowPdfButtonProps) => {
   return (
     <>
       <button
-        title={`Exportar venda #${sale.id} para PDF`}
-        className="bg-tranparent border-none w-fit hover:scale-[1.05] duration-300 "
+        title="Exportar detalhes do produto para PDF"
+        className="btn bg-transparent text-gray-500 border-gray-500"
         onClick={() => handlePrint()}
       >
         <svg
           enableBackground="new 0 0 500 500"
-          height="40px"
+          height="50px"
           id="Layer_1"
           version="1.1"
           viewBox="0 0 500 500"
-          width="40px"
+          width="50px"
         >
           <line
             fill="none"
@@ -299,10 +302,10 @@ const RowPdfButton = ({ Component,sale }: RowPdfButtonProps) => {
         </svg>
       </button>
       <div className="hidden">
-        <Component ref={tableRef} sale={sale} />
+        <Component ref={tableRef} sales={sales} product={product} columns={columns}/>
       </div>
     </>
   );
 };
 
-export default RowPdfButton;
+export default ProductPdfButton;
