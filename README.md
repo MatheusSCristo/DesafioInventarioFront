@@ -29,8 +29,13 @@ cd techhub
 ```
 ### 2. Rodar o FrontEnd
 ```bash
+npm install
+```
+
+### 3. Rodar o FrontEnd
+```bash
 npm run dev
 ```
 
-### 3. Acessar a pagina
+### 4. Acessar a pagina
   - http://localhost:5173
